@@ -1,47 +1,50 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import Profil from './components/Profil.vue';
+
+
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <Profil />
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+  user-select: none;
+  scroll-behavior: smooth;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+:root {
+  --txt-xs-size: 0.75rem;
+  --txt-sm-size: 0.875rem;
+  --txt-base-size: 1rem;
+  --txt-lg-size: 1.2rem;
+  --txt-xl-size: 1.5rem;
+  --txt-2xl-size: 2rem;
+  --txt-xs-weight: 200;
+  --txt-sm-weight: 300;
+  --txt-base-weight: 400;
+  --txt-lg-weight: 500;
+  --txt-xl-weight: 600;
+  --txt-2xl-weight: 700;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  z-index: 0;
 }
 </style>

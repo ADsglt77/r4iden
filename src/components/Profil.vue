@@ -1,0 +1,233 @@
+<script setup lang="ts">
+import { ref } from 'vue';
+import Badges from './badges.vue';
+import Presence from './presence.vue';
+import IconsMemberOnline from './icons/MemberOnline.vue';
+import IconsMemberOffline from './icons/MemberOffline.vue';
+import IconsView from './icons/View.vue';
+import Icons from './Icons.vue';
+
+const isEnter = ref(false);
+const video = ref<any>();
+const muted = ref<boolean>(false);
+
+
+function enterClick(): void {
+    isEnter.value = true;
+    showQuote();
+    if (video.value) {
+        video.value.play();
+    }
+}
+
+const quote = ref<string>('');
+const quotes = ['I\'ll leave the rest to you ...', 'A man dies when his memory is forgotten', 'Can we make another promise ?'];
+
+function showQuote(): void {
+    const currentQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    let i = 0;
+    const interval = setInterval(() => {
+        if (i >= currentQuote.length) {
+            clearInterval(interval);
+            deleteQuote();
+            return;
+        }
+        quote.value += currentQuote[i];
+        i++;
+    }, 100);
+}
+
+function deleteQuote(): void {
+    const interval = setInterval(() => {
+        if (quote.value.length <= 0) {
+            clearInterval(interval);
+            showQuote();
+            return;
+        }
+        quote.value = quote.value.slice(0, -1);
+    }, 60);
+}
+</script>
+
+<template>
+    <button @click="enterClick" v-if="!isEnter" id="enterClick">🥥 • Click to enter . . .</button>
+    <div class="center">
+        <video src="@/assets/background.mp4" id="background" :muted loop playsinline ref="video"></video>
+        <div class="content">
+            <div class="profil">
+                <img src="/pp.gif" alt="">
+                <div>
+                    <h1>AD<Badges /></h1>
+                    <h3><span>{{ quote }}</span></h3>
+                    <p>Dev Web UI & UX</p>
+                </div>
+            </div>
+            <div class="box">
+                <div>
+                    <img src="/pp.gif" alt="" id="ppDisc">
+                    <img src="/presence/dnd.png" alt="" id="presence">
+                </div>
+                <div>
+                    <h2>r4id3n.</h2>
+                    <p><Presence /></p>
+                </div>
+            </div>
+            <div class="box">
+                <img src="/pp2.png" alt="" id="ppServ">
+                <div>
+                    <h2>Snipy | # Come Back</h2>
+                    <p><IconsMemberOnline /> 69 online<IconsMemberOffline /> 69 Total</p>
+                    <a href="">JOIN</a>
+                </div>
+            </div>
+            <div class="view">
+                <IconsView />
+                <p>6.999</p>
+            </div>
+        </div>
+    </div>
+    <Icons />
+</template>
+
+<style scoped>
+#background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    filter: brightness(0.5);
+    z-index: -10;
+}
+
+#enterClick {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+    background-color: #000;
+    border: none;
+    color: #fff;
+    font-size: var(--txt-2xl-size);
+    font-weight: var(--txt-lg-weight);
+}
+
+.content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.content .profil {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+}
+
+.content .profil img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.50);
+}
+
+.content .profil div h1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.content .profil div h3 {
+    min-height: 29px;
+}
+
+.content .box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    padding: 10px;
+    gap: 5px;
+    transition: 0.3s ease;
+}
+
+.content .box:hover {
+    background-color: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.content .box #ppDisc,
+.content .box #ppServ {
+    display: flex;
+    width: 80px;
+    height: 80px;
+    border-radius: 10%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.content .box #ppDisc {
+    border-radius: 50%;
+}
+
+.content .box div {
+    position: relative;
+}
+
+.content .box #presence {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    backdrop-filter: blur(10px);
+}
+
+.content .box h2 {
+    font-size: var(--txt-lg-size);
+    font-weight: var(--txt-lg-weight);
+}
+
+.content .box a {
+    border: none;
+    background-color: #1a6334;
+    color: #fff;
+    font-size: 0.7rem;
+    padding: 2px 6px 2px 6px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.content .view {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 10px;
+}
+
+.content .view p {
+    font-weight: var(--txt-sm-weight);
+    font-size: var(--txt-sm-size);
+}
+
+@media screen and (max-width: 850px) {
+    .content {
+        grid-template-columns: 1fr;
+        width: 500px;
+    }
+}
+</style>
