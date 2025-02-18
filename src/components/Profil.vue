@@ -76,7 +76,10 @@ function deleteQuote(): void {
                 <img src="/pp2.png" alt="" id="ppServ">
                 <div>
                     <h2>Snipy | # Come Back</h2>
-                    <p><IconsMemberOnline /> 69 online<IconsMemberOffline /> 69 Total</p>
+                    <div>
+                        <p><IconsMemberOnline /> 69 online</p>
+                        <p><IconsMemberOffline /> 69 Total</p>
+                    </div>
                     <a href="">JOIN</a>
                 </div>
             </div>
@@ -199,6 +202,11 @@ function deleteQuote(): void {
 .content .box h2 {
     font-size: var(--txt-lg-size);
     font-weight: var(--txt-lg-weight);
+}
+
+.content .box div div {
+    display: flex;
+    gap: 10px;
 }
 
 .content .box a {
