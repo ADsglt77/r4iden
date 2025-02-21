@@ -51,45 +51,54 @@ function deleteQuote(): void {
 
 <template>
     <button @click="enterClick" v-if="!isEnter" id="enterClick">🥥 • Click to enter . . .</button>
-    <div class="center">
-        <video src="@/assets/background.mp4" id="background" :muted loop playsinline ref="video"></video>
-        <div class="content">
-            <div class="profil">
-                <img src="/pp.gif" alt="">
-                <div>
-                    <h1>AD<Badges /></h1>
-                    <h3><span>{{ quote }}</span></h3>
-                    <p>Dev Web UI & UX</p>
-                </div>
+    <video src="@/assets/background.mp4" id="background" :muted loop playsinline ref="video"></video>
+    <div class="content">
+        <div class="profil">
+            <img src="/pp.gif" alt="">
+            <div>
+                <h1>AD
+                    <Badges />
+                </h1>
+                <h3><span>{{ quote }}</span></h3>
+                <p>Dev Web UI & UX</p>
             </div>
-            <div class="box">
-                <div>
-                    <img src="/pp.gif" alt="" id="ppDisc">
-                    <img src="/presence/dnd.png" alt="" id="presence">
-                </div>
-                <div>
-                    <h2>r4id3n.</h2>
-                    <p><Presence /></p>
-                </div>
+        </div>
+        <div class="box">
+            <div>
+                <img src="/pp.gif" alt="" id="ppDisc">
+                <img src="/presence/dnd.png" alt="" id="presence">
             </div>
-            <div class="box">
-                <img src="/pp2.png" alt="" id="ppServ">
-                <div>
-                    <h2>Snipy | # Come Back</h2>
-                    <div>
-                        <p><IconsMemberOnline /> 69 online</p>
-                        <p><IconsMemberOffline /> 69 Total</p>
-                    </div>
-                    <a href="">JOIN</a>
-                </div>
+            <div>
+                <h2>r4id3n.</h2>
+                <p>
+                    <Presence />
+                </p>
             </div>
-            <div class="view">
+        </div>
+        <div class="box">
+            <img src="/pp2.gif" alt="" id="ppServ">
+            <div>
+                <h2>Dev | By Cleboost & ΛD</h2>
+                <div>
+                    <p>
+                        <IconsMemberOnline /> 4 online
+                    </p>
+                    <p>
+                        <IconsMemberOffline /> 12 Total
+                    </p>
+                </div>
+                <a href="">JOIN</a>
+            </div>
+        </div>
+        <div class="view">
+            <div>
                 <IconsView />
                 <p>6.999</p>
             </div>
+            <Icons id="IconsPhone" />
         </div>
     </div>
-    <Icons />
+    <Icons id="IconsDesktop" />
 </template>
 
 <style scoped>
@@ -118,7 +127,6 @@ function deleteQuote(): void {
     z-index: 10;
     background-color: #000;
     border: none;
-    color: #fff;
     font-size: var(--txt-2xl-size);
     font-weight: var(--txt-lg-weight);
 }
@@ -212,7 +220,6 @@ function deleteQuote(): void {
 .content .box a {
     border: none;
     background-color: #1a6334;
-    color: #fff;
     font-size: 0.7rem;
     padding: 2px 6px 2px 6px;
     border-radius: 8px;
@@ -223,6 +230,7 @@ function deleteQuote(): void {
     grid-column: 1 / -1;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 8px;
     margin-left: 10px;
 }
@@ -232,10 +240,47 @@ function deleteQuote(): void {
     font-size: var(--txt-sm-size);
 }
 
+.content .view div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#IconsPhone {
+    display: none;
+}
+
+#IconsDesktop {
+    display: block;
+}
+
 @media screen and (max-width: 850px) {
     .content {
-        grid-template-columns: 1fr;
-        width: 500px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content .profil {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .content .profil div h3 {
+        display: none;
+    }
+
+    .content .box {
+        width: max-content;
+        min-width: 350px;
+        margin: 0 auto;
+    }
+
+    #IconsDesktop {
+        display: none;
+    }
+
+    #IconsPhone {
+        display: flex;
     }
 }
 </style>

@@ -5,7 +5,7 @@
 <template>
     <div>
         <img src="/badges/karmin.png" alt="">
-        voici ma presence
+        discord.gg/devweb
     </div>
 </template>
 
