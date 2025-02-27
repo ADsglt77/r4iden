@@ -32,7 +32,6 @@ interface UserDiscord {
 
 const {data:servers} = await useFetch<Server[]>("/api/servers")
 const {data:discord} = await useFetch<UserDiscord>("/api/discord")
-const {data: view} = await useFetch<number>("/api/view")
 
 let quoteInterval: number | undefined;
 
@@ -127,10 +126,7 @@ onUnmounted(() => {
 			</div>
 		</div>
 		<div class="view">
-			<div>
-				<IconsView />
-				<p>{{ view }}</p>
-			</div>
+            <View></View>
 			<Icons id="IconsPhone" />
 		</div>
 	</div>
