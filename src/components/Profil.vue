@@ -54,7 +54,7 @@ function deleteQuote(): void {
     <video src="@/assets/background.mp4" id="background" :muted loop playsinline ref="video"></video>
     <div class="content">
         <div class="profil">
-            <img src="/pp.gif" alt="">
+            <img src="/pp2.gif" alt="">
             <div>
                 <h1>AD
                     <Badges />
@@ -76,15 +76,15 @@ function deleteQuote(): void {
             </div>
         </div>
         <div class="box">
-            <img src="/pp2.gif" alt="" id="ppServ">
+            <img src="/logo.png" alt="" id="ppServ">
             <div>
-                <h2>Dev | By Cleboost & ΛD</h2>
+                <h2>🌱 Dev | By Cleboost & ΛD</h2>
                 <div>
                     <p>
-                        <IconsMemberOnline /> 4 online
+                        <IconsMemberOnline /> 5 online
                     </p>
                     <p>
-                        <IconsMemberOffline /> 12 Total
+                        <IconsMemberOffline /> 13 Total
                     </p>
                 </div>
                 <a href="">JOIN</a>
