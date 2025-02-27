@@ -3,10 +3,7 @@
 </script>
 
 <template>
-    <div>
-        <img src="/badges/karmin.png" alt="">
-        discord.gg/devweb
-    </div>
+
 </template>
 
 <style scoped>

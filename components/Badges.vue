@@ -64,4 +64,36 @@ p {
 img:hover+p {
     opacity: 1;
 }
+
+@keyframes fadeInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bages > div {
+  opacity: 0; /* état initial */
+  animation: fadeInFromTop 1s forwards;
+}
+
+.bages > div:nth-child(1) {
+  animation-delay: 0ms;
+}
+.bages > div:nth-child(2) {
+  animation-delay: 100ms;
+}
+.bages > div:nth-child(3) {
+  animation-delay: 200ms;
+}
+.bages > div:nth-child(4) {
+  animation-delay: 300ms;
+}
+.bages > div:nth-child(5) {
+  animation-delay: 400ms;
+}
 </style>

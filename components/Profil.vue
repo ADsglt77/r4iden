@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import Badges from './badges.vue';
-import Presence from './presence.vue';
+import { onMounted, ref } from 'vue';
+import Badges from './Badges.vue';
+import Presence from './Presence.vue';
 import IconsMemberOnline from './icons/MemberOnline.vue';
 import IconsMemberOffline from './icons/MemberOffline.vue';
 import IconsView from './icons/View.vue';
@@ -10,6 +10,17 @@ import Icons from './Icons.vue';
 const isEnter = ref(false);
 const video = ref<any>();
 const muted = ref<boolean>(false);
+
+const servers = ref<{
+    invite:string
+    member?: number
+    online?: number
+    icon?: string
+    name?: string
+}[]>([
+    {invite: 'devweb'},
+    {invite: 'snipy'}
+])
 
 
 function enterClick(): void {
@@ -47,58 +58,78 @@ function deleteQuote(): void {
         quote.value = quote.value.slice(0, -1);
     }, 60);
 }
+
+onMounted(async () => {
+    const promises = servers.value.map(server => getServerInfo(server.invite));
+    const results = await Promise.all(promises);
+    servers.value = servers.value.map((server, index) => ({
+        ...server,
+        ...results[index]
+    }));
+});
+
+async function getServerInfo(invite:string) {
+    return await fetch(`https://discord.com/api/invite/${invite}?with_counts=true`).then(res => res.json()).then(data => {
+        return {
+            name: data.guild.name,
+            member: data.approximate_member_count,
+            online: data.approximate_presence_count,
+            icon: "https://cdn.discordapp.com/icons/" + data.guild.id + "/" + data.guild.icon + ".png",
+        }
+    });
+}
 </script>
 
 <template>
-    <button @click="enterClick" v-if="!isEnter" id="enterClick">🥥 • Click to enter . . .</button>
-    <video src="@/assets/background.mp4" id="background" :muted loop playsinline ref="video"></video>
-    <div class="content">
-        <div class="profil">
-            <img src="/pp2.gif" alt="">
-            <div>
-                <h1>AD
-                    <Badges />
-                </h1>
-                <h3><span>{{ quote }}</span></h3>
-                <p>Dev Web UI & UX</p>
-            </div>
-        </div>
-        <div class="box">
-            <div>
-                <img src="/pp.gif" alt="" id="ppDisc">
-                <img src="/presence/dnd.png" alt="" id="presence">
-            </div>
-            <div>
-                <h2>r4id3n.</h2>
-                <p>
-                    <Presence />
-                </p>
-            </div>
-        </div>
-        <div class="box">
-            <img src="/logo.png" alt="" id="ppServ">
-            <div>
-                <h2>🌱 Dev | By Cleboost & ΛD</h2>
-                <div>
-                    <p>
-                        <IconsMemberOnline /> 5 online
-                    </p>
-                    <p>
-                        <IconsMemberOffline /> 13 Total
-                    </p>
-                </div>
-                <a href="">JOIN</a>
-            </div>
-        </div>
-        <div class="view">
-            <div>
-                <IconsView />
-                <p>6.999</p>
-            </div>
-            <Icons id="IconsPhone" />
-        </div>
-    </div>
-    <Icons id="IconsDesktop" />
+	<button @click="enterClick" v-if="!isEnter" id="enterClick">🥥 • Click to enter . . .</button>
+	<video src="@/assets/background.mp4" id="background" :muted loop playsinline ref="video"></video>
+	<div class="content">
+		<div class="profil">
+			<img src="/pp2.gif" alt="" />
+			<div>
+				<h1>
+					AD
+					<Badges />
+				</h1>
+				<h3>
+					<span>{{ quote }}</span>
+				</h3>
+				<p>Dev Web UI & UX</p>
+			</div>
+		</div>
+		<div class="box">
+			<div>
+				<img src="/pp.gif" alt="" id="ppDisc" />
+				<img src="/presence/dnd.png" alt="" id="presence" />
+			</div>
+			<div>
+				<h2>r4id3n.</h2>
+				<p>
+					<Presence />
+				</p>
+			</div>
+		</div>
+		<div class="box" v-for="server in servers" :key="server.invite">
+			<!-- <img src="/logo.png" alt="" id="ppServ" /> -->
+			<img :src="server.icon" alt="" id="ppServ" />
+			<div>
+				<h2>{{ server.name }}</h2>
+				<div>
+					<p><IconsMemberOnline /> {{ server.online }} Online</p>
+					<p><IconsMemberOffline /> {{ server.member }} Total</p>
+				</div>
+				<a :href="`https://discord.gg/${server.invite}`" target="_blank">JOIN</a>
+			</div>
+		</div>
+		<div class="view">
+			<div>
+				<IconsView />
+				<p>6.999</p>
+			</div>
+			<Icons id="IconsPhone" />
+		</div>
+	</div>
+	<Icons id="IconsDesktop" />
 </template>
 
 <style scoped>
