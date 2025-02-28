@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const view = ref<number>(await usePrismaClient().view.count());
+const {data:view} = await useFetch("/api/view")
 </script>
 
 <template>
