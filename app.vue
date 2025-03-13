@@ -30,8 +30,8 @@ interface UserDiscord {
   precence: string;
 }
 
-const {data:servers} = await useFetch<Server[]>("/api/servers")
-const {data:discord} = await useFetch<UserDiscord>("/api/discord")
+const {data:servers} = await useFetch<Server[]>("https://api.r4aiden.online/servers")
+const {data:discord} = await useFetch<UserDiscord>("https://api.r4aiden.online/api/discord")
 
 let quoteInterval: number | undefined;
 
