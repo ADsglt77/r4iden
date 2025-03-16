@@ -2,23 +2,38 @@
 import IconsInstagram from './icons/social/instagram.vue';
 import IconsGithub from './icons/social/github.vue';
 import IconsBuyMeCoffee from './icons/social/buyMeCoffee.vue';
+
+const socialLinks = ref([
+    {
+        id: 'instagram',
+        url: 'https://www.instagram.com/ad.sglt/',
+        label: 'ad.sglt',
+        icon: IconsInstagram
+    },
+    {
+        id: 'github',
+        url: 'https://github.com/ADsglt77',
+        label: 'ADsglt77',
+        icon: IconsGithub
+    },
+    {
+        id: 'buymeacoffee',
+        url: 'https://buymeacoffee.com/adsglt',
+        label: 'ADsglt',
+        icon: IconsBuyMeCoffee
+    }
+]);
 </script>
 
 <template>
-    <div class="icons">
-        <div class="icon-wrap">
-            <a href="https://www.instagram.com/ad.sglt/" target="_blank"><IconsInstagram /></a>
-            <p>ad.sglt</p>
-        </div>
-        <div class="icon-wrap">
-            <a href="https://github.com/ADsglt77" target="_blank"><IconsGithub /></a>
-            <p>ADsglt77</p>
-        </div>
-        <div class="icon-wrap">
-            <a href="https://buymeacoffee.com/adsglt" target="_blank"><IconsBuyMeCoffee /></a>
-            <p>ADsglt</p>
-        </div>
-    </div>
+	<div class="icons">
+		<div v-for="link in socialLinks" :key="link.id" class="icon-wrap">
+			<a :href="link.url" target="_blank">
+				<component :is="link.icon" />
+			</a>
+			<p>{{ link.label }}</p>
+		</div>
+	</div>
 </template>
 
 <style scoped>
@@ -28,8 +43,6 @@ import IconsBuyMeCoffee from './icons/social/buyMeCoffee.vue';
     bottom: 20px;
     display: flex;
     flex-direction: column;
-    
-
 }
 
 .icon-wrap {

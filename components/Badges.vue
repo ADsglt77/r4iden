@@ -1,27 +1,26 @@
 <script setup lang="ts">
-
 </script>
 
 <template>
     <div class="bages">
         <div>
-            <img src="/badges/nitro.png" alt="">
+            <img src="/img/badges/nitro.png" alt="">
             <p>Nitro Subscriber</p>
         </div>
         <div>
-            <img src="/badges/boostSince1month.png" alt="">
+            <img src="/img/badges/boostSince1month.png" alt="">
             <p>Server booster since Jan. 28, 2025</p>
         </div>
         <div>
-            <img src="/badges/earlySupp.png" alt="">
+            <img src="/img/badges/earlySupp.png" alt="">
             <p>Early support</p>
         </div>
         <div>
-            <img src="/badges/bravery.png" alt="">
+            <img src="/img/badges/bravery.png" alt="">
             <p>HypeSquad Bravery</p>
         </div>
         <div>
-            <img src="/badges/quest.png" alt="">
+            <img src="/img/badges/quest.png" alt="">
             <p>A terminé une quête</p>
         </div>
     </div>
