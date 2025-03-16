@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const {data:view} = await useFetch("/api/view")
+const {data:view} = await useFetch("https://api.r4aiden.online/view")
 </script>
 
 <template>
